@@ -20,6 +20,7 @@ int main()
 	cout << "Welcome, " << Cname << " to Boburg, it is from here that most begin their journey of the ages." << endl << endl;
 
 	//test
+	//test2
 
 	system("pause");
 	return 0;

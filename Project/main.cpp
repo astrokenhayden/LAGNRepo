@@ -3,14 +3,15 @@
 #include<string>
 #include<windows.h>
 using namespace std;
-
+const int necessaryCompletions = 4;
 void startout(char enter, fstream& start);
-void displayMainMenu(char menuControl);
-
+void displayMainMenu(char menuControl, int&);
+int incrementCompletions(int&);
 
 int main() 
 {
 	string Cname;
+	int successfulCompletions = 0;
 	fstream start;
 	char enter{};
 	char menuControl{};
@@ -25,7 +26,7 @@ int main()
 	
 	do
 	{
-		displayMainMenu(menuControl);
+		displayMainMenu(menuControl, successfulCompletions);
 	}while (menuControl != 9);
 	
 	
@@ -74,7 +75,7 @@ void startout(char enter, fstream& start)
 
 }
 
-void displayMainMenu(char menuControl)
+void displayMainMenu(char menuControl, int& successfulCompletions)
 {
 	
 	
@@ -93,6 +94,7 @@ void displayMainMenu(char menuControl)
 		{
 		case '1':
 		{
+			incrementCompletions(successfulCompletions);
 			break;
 		}
 		case '2':
@@ -109,6 +111,31 @@ void displayMainMenu(char menuControl)
 		}
 		case '5':
 		{
+			if (successfulCompletions == 4)
+			{
+
+			}
+			else
+			{
+				cout << "\nYou have not collected enough completion plaques yet:" << endl << endl;
+				if (successfulCompletions == 1)
+				{
+					cout << "You current have 1 plaque.";
+				}
+				else
+				{
+					cout << "You currently have " << successfulCompletions << " plaques.";
+				}
+				if (necessaryCompletions - successfulCompletions == 1)
+				{
+					cout << " You need 1 more plaque to gain entry to the city." << endl;
+				}
+				else
+				{
+					cout << " You need " << necessaryCompletions - successfulCompletions << " more plaques to gain entry to the city." << endl;
+				}
+			}
+			system("pause");
 			break;
 		}
 		case '9':
@@ -124,3 +151,10 @@ void displayMainMenu(char menuControl)
 		}
 
 }
+
+int incrementCompletions(int &successfulCompletions)
+{
+	successfulCompletions += 1;
+	return successfulCompletions;
+}
+

@@ -8,7 +8,7 @@ using namespace std;
 const int necessaryCompletions = 4;
 char menuControl{};
 void startout(char enter, fstream& start);
-void displayMainMenu(char menuControl, int&);
+void displayMainMenu(int&);
 int incrementCompletions(int&);
 void enterNaridge();
 int cowardlyExit();
@@ -31,7 +31,7 @@ int main()
 	
 	do
 	{
-		displayMainMenu(menuControl, successfulCompletions);
+		displayMainMenu(successfulCompletions);
 	}while (menuControl != 9);
 	
 	
@@ -80,7 +80,7 @@ void startout(char enter, fstream& start)
 
 }
 
-void displayMainMenu(char menuControl, int& successfulCompletions)
+void displayMainMenu(int& successfulCompletions)
 {
 	
 	

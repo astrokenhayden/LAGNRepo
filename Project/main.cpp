@@ -67,8 +67,6 @@ void startout(char enter, fstream& start)
 	if (enter == 'y' || enter == 'Y')
 	{
 		system("cls");
-
-
 	}
 	else
 	{
@@ -82,11 +80,9 @@ void startout(char enter, fstream& start)
 
 void displayMainMenu(int& successfulCompletions)
 {
-	
-	
 		system("cls");
 		cout << "Press the number in the [] in order to select a trial, or check your progress towards admission" << endl << endl;
-		cout << "[1] A trial of wits" << endl;
+		cout << "[1]" << endl;
 		cout << "[2]" << endl;
 		cout << "[3]" << endl;
 		cout << "[4]" << endl;
@@ -99,6 +95,7 @@ void displayMainMenu(int& successfulCompletions)
 		{
 		case '1':
 		{
+			//temp just to make sure increment works
 			incrementCompletions(successfulCompletions);
 			break;
 		}

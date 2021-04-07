@@ -2,11 +2,16 @@
 #include<fstream>
 #include<string>
 #include<windows.h>
+#include<cstdlib>
+#include<ctime>
 using namespace std;
 const int necessaryCompletions = 4;
+char menuControl{};
 void startout(char enter, fstream& start);
 void displayMainMenu(char menuControl, int&);
 int incrementCompletions(int&);
+void enterNaridge();
+int cowardlyExit();
 
 int main() 
 {
@@ -14,7 +19,7 @@ int main()
 	int successfulCompletions = 0;
 	fstream start;
 	char enter{};
-	char menuControl{};
+	
 	startout(enter, start);
 	cout << "Welcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
 	cin.ignore();
@@ -32,7 +37,7 @@ int main()
 	
 	
 	
-	system("pause");
+	system("pause>null");
 	return 0;
 }
 
@@ -113,7 +118,7 @@ void displayMainMenu(char menuControl, int& successfulCompletions)
 		{
 			if (successfulCompletions == 4)
 			{
-
+				enterNaridge();
 			}
 			else
 			{
@@ -140,8 +145,7 @@ void displayMainMenu(char menuControl, int& successfulCompletions)
 		}
 		case '9':
 		{
-			//temp exit
-			exit(0);
+			cowardlyExit();
 			break;
 		}
 		default:
@@ -160,3 +164,34 @@ int incrementCompletions(int &successfulCompletions)
 	return successfulCompletions;
 }
 
+void enterNaridge()
+{
+	char enterNar{};
+	cout << "\n\nCongratualtions!!!!! You have succesfully passed the four entrance trials" << endl;
+	cout << "\n[1] If you would like to provide feedback on the trials prior to entering the city" << endl;
+	cout << "[2] If you would prefer to enter the city without providing feedback";
+	cout << "\n\nPlease select your method of entry: ";
+	cin >> enterNar;
+
+	switch (enterNar)
+	{
+	case 1: 
+	{
+		// needs feedback function
+		break;
+	}
+	case 2:
+	{
+		//needs complimentary exit
+		break;
+	}
+	}
+
+}
+int cowardlyExit()
+{
+	system("cls");
+	cout << "So this is the way it ends..." << endl << "Go, Leave this place and never return" <<endl << endl << "Press any key to get out of my sight";
+	menuControl = 9;
+	return 0;
+}

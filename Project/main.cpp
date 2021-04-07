@@ -140,6 +140,8 @@ void displayMainMenu(char menuControl, int& successfulCompletions)
 		}
 		case '9':
 		{
+			//temp exit
+			exit(0);
 			break;
 		}
 		default:

@@ -9,15 +9,17 @@ const int necessaryCompletions = 4;
 char menuControl{};
 void startout(char enter, fstream& start);
 void displayMainMenu(int&);
-int incrementCompletions(int&);
 void enterNaridge();
+void writeFeedback();
+int incrementCompletions(int&);
+
 int cowardlyExit();
 
 int main() 
 {
 	string Cname;
-	int successfulCompletions = 0;
 	fstream start;
+	int successfulCompletions = 0;
 	char enter{};
 	
 	startout(enter, start);
@@ -54,6 +56,7 @@ void startout(char enter, fstream& start)
 	else
 	{
 		cout << start.rdbuf();
+		start.close();
 	}
 	cin >> enter;
 	if (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N')
@@ -70,7 +73,8 @@ void startout(char enter, fstream& start)
 	}
 	else
 	{
-		cout << "\nA sad day indeed, though perhaps, the decision shows wisdom beyond the average soul." << endl << "Go on, live your life, do not regret the choice you made here today." << endl;
+		cout << "\n---------------------------------------------------------------------------------";
+		cout << "\n\nA sad day indeed, though perhaps, the decision shows wisdom beyond the average soul." << endl << "Go on, live your life, do not regret the choice you made here today." << endl;
 		cout << "Press any key to leave";
 		system("pause>null");
 		exit(1);
@@ -176,7 +180,10 @@ void enterNaridge()
 	{
 	case '1': 
 	{
-		// needs feedback function
+		writeFeedback();
+		cout << "Thank you so much for your feedback; We hope your life in Naridge is fruitful!" << endl;
+		system("pause>null");
+		exit(1);
 		break;
 	}
 	case '2':
@@ -196,6 +203,37 @@ void enterNaridge()
 		system("cls");
 		enterNaridge();
 	}
+	}
+
+}
+void writeFeedback()
+{
+	string feedback;
+	fstream feedbackOut;
+	feedbackOut.open("FeedbackOut.txt", ios::out);
+	if (feedbackOut.fail())
+	{
+		cout << "Advice.txt failed to open, please check the file." << endl;
+		cout << "Congratulations again on surpassing the trials, sorry our feedback system was not functional" << endl;
+		cout << "Have a great time! (Make any input to enter)";
+		system("pause>null");
+		exit(1);
+	}
+	else
+	{
+		cout << endl << "**********************************************************************" << endl;
+		cout << "Please enter your feedback below. Your feedback may be as long as you need," << endl;
+		cout << "and you can press the <Enter> key one time to type on the next line," << endl;
+		cout << "and input the <Enter> key twice to indicate the end of the input:" << endl << endl;
+		cin.ignore();
+		getline(cin, feedback);
+		while (feedback.length() > 0)
+		{
+			feedbackOut << feedback << endl;
+			getline(cin, feedback);
+		}
+		cout << "**********************************************************************" << endl << endl;
+		feedbackOut.close();
 	}
 
 }

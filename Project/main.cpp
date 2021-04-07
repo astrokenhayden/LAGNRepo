@@ -5,6 +5,7 @@
 using namespace std;
 
 void startout(char enter, fstream& start);
+void displayMainMenu();
 
 
 int main() //start works
@@ -14,11 +15,11 @@ int main() //start works
 	char enter{};
 	startout(enter, start);
 
-	cout << "Brave Adventurer! What should we call you by when we record you in the annals? ";
+	cout << "Welcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
 	cin.ignore();
 	getline(cin, Cname);
-	cout << "Welcome, " << Cname << " to Boburg, it is from here that most begin their journey of the ages." << endl << endl;
-
+	cout << "Welcome, " << Cname << " to Naridge Gatehouse, it is from here that most begin their trial of entry." << endl << endl << "Press any key to enter trial selection";
+	system("pause>null");
 
 
 	system("pause");
@@ -47,17 +48,14 @@ void startout(char enter, fstream& start)
 	{
 		do
 		{
-			cout << "You must choose to either undertake the journey, or never return!(Y/N): ";
+			cout << "You must choose to either undertake the trials, or never return!(Y/N): ";
 			cin >> enter;
 		} while (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N');
 	}
 	if (enter == 'y' || enter == 'Y')
 	{
 		system("cls");
-		cout << "\n\nBest of luck on your journey!!!";
-		cout << "\nPress any key to begin" << endl;
-		system("pause>null");
-		system("cls");
+
 
 	}
 	else
@@ -70,6 +68,10 @@ void startout(char enter, fstream& start)
 
 	}
 
+}
 
+void displayMainMenu()
+{
+	system("cls");
 
 }

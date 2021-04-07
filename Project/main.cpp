@@ -89,37 +89,38 @@ void displayMainMenu(char menuControl)
 		cout << "Please select an option: ";
 		cin >> menuControl;
 
-		if (menuControl == '1')
+		switch (menuControl)
 		{
-
+		case '1':
+		{
+			break;
 		}
-		else if (menuControl == '2')
+		case '2':
 		{
-
+			break;
 		}
-		else if (menuControl == '3')
+		case '3':
 		{
-
+			break;
 		}
-		else if (menuControl == '4')
+		case '4':
 		{
-
+			break;
 		}
-		else if (menuControl == '5')
+		case '5':
 		{
-
+			break;
 		}
-		else if (menuControl == '9')
+		case '9':
 		{
-
+			break;
 		}
-		else
+		default:
 		{
-			cout << "You have made an invalid input. Please Input one of the options" << endl << "Press any key to try again";
+			cout << "This is an invalid input, Please select a correct one next time";
 			system("pause>null");
 			system("cls");
-			
 		}
-	
+		}
 
 }

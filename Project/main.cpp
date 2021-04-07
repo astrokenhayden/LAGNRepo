@@ -5,14 +5,15 @@
 #include<cstdlib>
 #include<ctime>
 using namespace std;
+//global variables
 const int necessaryCompletions = 4;
 char menuControl{};
+//functions
 void startout(char enter, fstream& start);
 void displayMainMenu(int&);
 void enterNaridge();
 void writeFeedback();
 int incrementCompletions(int&);
-
 int cowardlyExit();
 
 int main() 
@@ -26,9 +27,9 @@ int main()
 	cout << "Welcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
 	cin.ignore();
 	getline(cin, Cname);
-	cout << "Welcome, " << Cname << " to Naridge Gatehouse, it is from here that most begin their trial of entry." << endl;
+	cout << "\nWelcome, " << Cname << " to Naridge Gatehouse, it is from here that most begin their trial of entry." << endl;
 	cout << "Here at the Gatehouse we control all entry to the city through our trials" << endl;
-	cout << "It is a simple system, pass all four trials and gain admission, or give up prior and leave in shame" << endl << endl << "Press any key to enter trial selection";;
+	cout << "It is a simple system, pass all four trials, each earning you a completion plaque." << endl << "Turn 4 plaques in at the Gatehouse and obtain entry, or give up prior and leave in shame" << endl << endl << "Press any key to enter trial selection";;
 	system("pause>null");
 	
 	do
@@ -37,15 +38,12 @@ int main()
 	}while (menuControl != 9);
 	
 	
-	
-	
 	system("pause>null");
 	return 0;
 }
 
 void startout(char enter, fstream& start)
 {
-
 	start.open("start.txt", ios::in);
 	if (start.fail())
 	{
@@ -79,7 +77,6 @@ void startout(char enter, fstream& start)
 		system("pause>null");
 		exit(1);
 	}
-
 }
 
 void displayMainMenu(int& successfulCompletions)
@@ -99,7 +96,7 @@ void displayMainMenu(int& successfulCompletions)
 		{
 		case '1':
 		{
-			//temp just to make sure increment works
+			//temp just to make sure increment and on works
 			incrementCompletions(successfulCompletions);
 			break;
 		}

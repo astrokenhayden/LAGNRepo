@@ -19,7 +19,7 @@ int main()
 	getline(cin, Cname);
 	cout << "Welcome, " << Cname << " to Boburg, it is from here that most begin their journey of the ages." << endl << endl;
 
-
+	//test
 
 	system("pause");
 	return 0;

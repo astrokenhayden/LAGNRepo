@@ -7,7 +7,7 @@ using namespace std;
 void startout(char enter, fstream& start);
 
 
-int main()
+int main() //start works
 {
 	string Cname;
 	fstream start;

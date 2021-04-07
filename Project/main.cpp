@@ -125,7 +125,7 @@ void displayMainMenu(int& successfulCompletions)
 				cout << "\nYou have not collected enough completion plaques yet:" << endl << endl;
 				if (successfulCompletions == 1)
 				{
-					cout << "You current have 1 plaque.";
+					cout << "You currently have 1 plaque.";
 				}
 				else
 				{
@@ -150,7 +150,8 @@ void displayMainMenu(int& successfulCompletions)
 		}
 		default:
 		{
-			cout << "This is an invalid input, Please select a correct one next time";
+			cout << "This is an invalid input, Please select a correct one next time" <<endl;
+			cout << "Make an input to get another chance";
 			system("pause>null");
 			system("cls");
 		}
@@ -167,7 +168,8 @@ int incrementCompletions(int &successfulCompletions)
 void enterNaridge()
 {
 	char enterNar{};
-	cout << "\n\nCongratualtions!!!!! You have succesfully passed the four entrance trials" << endl;
+	system("cls");
+	cout << "Congratualtions!!!!! You have succesfully passed the four entrance trials" << endl;
 	cout << "\n[1] If you would like to provide feedback on the trials prior to entering the city" << endl;
 	cout << "[2] If you would prefer to enter the city without providing feedback";
 	cout << "\n\nPlease select your method of entry: ";
@@ -175,15 +177,27 @@ void enterNaridge()
 
 	switch (enterNar)
 	{
-	case 1: 
+	case '1': 
 	{
 		// needs feedback function
 		break;
 	}
-	case 2:
+	case '2':
 	{
-		//needs complimentary exit
+		system("cls");
+		cout << "Please go right through then, I hope your time in Naridge is everything you dreamed of; you've certainly earned it." << endl << endl; 
+		cout << "*Program will close on keyboard input*";
+		system("pause>null");
+		exit(1);
 		break;
+	}
+	default:
+	{
+		cout << "This is an invalid input, Please select a correct one next time" << endl;
+		cout << "Make an input to get another chance";
+		system("pause>null");
+		system("cls");
+		enterNaridge();
 	}
 	}
 
@@ -191,7 +205,7 @@ void enterNaridge()
 int cowardlyExit()
 {
 	system("cls");
-	cout << "So this is the way it ends..." << endl << "Go, Leave this place and never return" <<endl << endl << "Press any key to get out of my sight";
+	cout << "So this is the way it ends..." << endl << "GO!, Leave this place and never return." <<endl << endl << "Press any key to get out of my sight.";
 	menuControl = 9;
 	return 0;
 }

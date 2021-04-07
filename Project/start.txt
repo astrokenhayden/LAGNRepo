@@ -1,8 +1,8 @@
-On the Elder Plain two great cities stand aloof from the turmoultuous land. 
-Boburg and Naridge exist apart from one another.
-The road between fraught with trials that only the bravest of adventurers dare to undertake.
+On the Elder Plain a great city stands aloof from the turmoultuous land. 
+Naridge exists apart from the world.
+Those who would seek entry must overcome four great trials.
 From Bandits on the Road, to the Falingual River, Goblins in the Calin Mountains, and the Cenote Desert.
-This journey is not one to undertake lightly. 
-For those willing and able however; the glory and riches that come from delivering your wares are enough to last many lifetimes.
+These trials are not undertaken lightly. 
+For those willing and able however; the glory and riches that come from gaining entry last many lifetimes.
 
-Are you amoungst the bravest of souls who will attempt this journey? (Y/N): 
+Are you amoungst the bravest of souls who will attempt this trial? (Y/N): 

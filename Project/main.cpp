@@ -6,6 +6,7 @@
 #include<ctime>
 using namespace std;
 //global variables
+bool hangmanCompleted = FALSE;
 const int necessaryCompletions = 4;
 char menuControl{};
 //functions
@@ -17,6 +18,7 @@ int incrementCompletions(int&);
 int cowardlyExit();
 int letterFill(char, string, string&); 
 void playhangman(int&, string&);
+
 
 int main() 
 {
@@ -98,7 +100,12 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		{
 		case '1':
 		{
-			//temp just to make sure increment and on works
+			if (hangmanCompleted == TRUE)
+			{
+				cout << "\nYou have already completed this Trial, you cannot retake a completed Trial." << "\nPress any key to return to Trial selection";
+				system("pause>null");
+			}
+			else
 			playhangman(successfulCompletions, Cname);
 			
 			break;
@@ -134,14 +141,14 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 				}
 				if (necessaryCompletions - successfulCompletions == 1)
 				{
-					cout << " You need 1 more plaque to gain entry to the city." << endl;
+					cout << " You need 1 more plaque to gain entry to the city." << "\n\nPress any key to return to the menu";
 				}
 				else
 				{
-					cout << " You need " << necessaryCompletions - successfulCompletions << " more plaques to gain entry to the city." << endl;
+					cout << " You need " << necessaryCompletions - successfulCompletions << " more plaques to gain entry to the city." << "\n\nPress any key to return to the menu";
 				}
 			}
-			system("pause");
+			system("pause>null");
 			break;
 		}
 		case '9':
@@ -345,6 +352,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 		if (word == unknown)									//If statement
 		{
 			incrementCompletions(successfulCompletions);
+			hangmanCompleted = TRUE;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 			cout << "\n\nYou have correctly unveiled: " << word << endl;
 			cout << "As a result, you have earned my completion plaque!";
@@ -415,3 +423,4 @@ int letterFill(char guess, string secretword, string& guessword)
 	}//end for
 	return matches;
 }
+

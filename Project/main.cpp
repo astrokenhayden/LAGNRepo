@@ -10,11 +10,13 @@ const int necessaryCompletions = 4;
 char menuControl{};
 //functions
 void startout(char enter, fstream& start);
-void displayMainMenu(int&);
+void displayMainMenu(int&, string&);
 void enterNaridge();
 void writeFeedback();
 int incrementCompletions(int&);
 int cowardlyExit();
+int letterFill(char, string, string&); 
+void playhangman(int&, string&);
 
 int main() 
 {
@@ -34,7 +36,7 @@ int main()
 	
 	do
 	{
-		displayMainMenu(successfulCompletions);
+		displayMainMenu(successfulCompletions, Cname);
 	}while (menuControl != 9);
 	
 	
@@ -79,7 +81,7 @@ void startout(char enter, fstream& start)
 	}
 }
 
-void displayMainMenu(int& successfulCompletions)
+void displayMainMenu(int& successfulCompletions, string& Cname)
 {
 		system("cls");
 		cout << "Press the number in the [] in order to select a trial, or check your progress towards admission" << endl << endl;
@@ -97,7 +99,8 @@ void displayMainMenu(int& successfulCompletions)
 		case '1':
 		{
 			//temp just to make sure increment and on works
-			incrementCompletions(successfulCompletions);
+			playhangman(successfulCompletions, Cname);
+			
 			break;
 		}
 		case '2':
@@ -240,4 +243,175 @@ int cowardlyExit()
 	cout << "So this is the way it ends..." << endl << "GO!, Leave this place and never return." <<endl << endl << "Press any key to get out of my sight.";
 	menuControl = 9;
 	return 0;
+}
+
+void playhangman(int& successfulCompletions, string& Cname)
+{
+
+//coded by Luke Martin
+//Picks a word from the file of 30 words, shows the user  _'s, they input a guess.
+//If correct reveal from the _'s where, then guess again,
+//Once all are reavealed user wins, if user runs out of "lives" game is lost
+
+	//variables
+	system("cls");
+	const int SIZE = 30;
+	int i = 0;
+	const int MAX_TRIES = 5;
+	char letter{};
+	int wrong_guess = 0;
+	string word;
+	string words[SIZE];										//one dimensional array
+	fstream hangmanwords;									//input file
+	//open file to obatin words
+	hangmanwords.open("words.txt");
+	//if else for error checking
+	if (hangmanwords.fail())								//if statement
+	{
+		cout << "words.txt failed to open, please check the file." << endl << "Press any key to return to trial selection.";
+		system("pause>null");
+	}
+	else
+	{
+		while (!hangmanwords.eof() && i < SIZE)				//While loop & checks  for EOF
+		{
+			getline(hangmanwords, words[i]);
+			++i;
+		}
+	}
+	//close the file
+	hangmanwords.close();//file close
+//choose and copy a word from array of words randomly
+	srand(time(NULL));
+	int n = rand() % 30;
+	word = words[n];
+
+	//sets word to be hidden by underscores
+	string unknown(word.length(), '_');
+	//while loop for program execution		
+	while (wrong_guess < MAX_TRIES)							//While Loop
+	{
+		//outputs heading with color
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+		cout << "***********************************************************************************************************************";
+		cout << "\nWelcome " << Cname << " to a trial of words, Your only hint is that all apply to C++";
+		cout << "\n\nEach letter is represented by an underscore, your goal, to unveil the word before your guesses run out!";
+		cout << "\n\nWe suggest one letter a time, but you may enter more if you want! \nBe warned, if you are fool enough to enter the same letter twice; it shall count as an incorrect input the second time!";
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+		if (MAX_TRIES - wrong_guess == 1)						//If statement
+		{
+			cout << "\n\nYou have " << MAX_TRIES - wrong_guess << " incorrect guess remaining to attempt to guess the word.";
+		}//end if
+		else
+		{
+			cout << "\n\nYou have " << MAX_TRIES - wrong_guess << " incorrect guesses remaining to attempt to guess the word.";
+		}//end else
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+		cout << "\n***********************************************************************************************************************";
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+		//displays the hidden word/whatever revealed letters each time
+		cout << "\n\n" << unknown;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+		//users guess
+		cout << "\n\nGuess a letter: ";
+		cin >> letter;
+
+		// Fill secret word with letter if the guess is correct,
+		// otherwise increment the number of wrong guesses.
+		if (letterFill(letter, word, unknown) == 0)				//If statement
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			cout << endl << "HAH! That is wrong!" << endl;
+			wrong_guess++;
+		}//end if
+		else
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+			cout << "\nA correct input.";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+			if (word != unknown)								//If statement
+			{
+				cout << "\n\n" << unknown << endl << endl;
+			}//end if
+		}//end else
+
+		// Tell user how many guesses are left/ ends the game if out of lives or word is found
+		//specific wording for 1 remaining
+		//winning scenario
+		if (word == unknown)									//If statement
+		{
+			incrementCompletions(successfulCompletions);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+			cout << "\n\nYou have correctly unveiled: " << word << endl;
+			cout << "As a result, you have earned my completion plaque!";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+			cout << "\n\nMake an input to return to the menu";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			break;
+			
+		}//end if
+		//losing scenario
+		else if (wrong_guess == MAX_TRIES)
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			cout << "You have run out of guesses.";
+			cout << "\nAs such you have failed this time; at the Gatehouse you may choose to comeback, or undertake another trial." << endl;
+			cout << "The word was: " << word << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+			cout << "\n\nMake an input to return to the menu";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+		}//end else if
+		//specific wording for 1 remaining
+		else if (MAX_TRIES - wrong_guess == 1)
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			cout << "\nYou have " << MAX_TRIES - wrong_guess;
+			cout << " guess left." << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+			cout << "Press a key to guess again." << endl;
+			system("pause>null");
+			system("cls");
+		}//end else if
+		//any other scenario
+		else
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			cout << "You have " << MAX_TRIES - wrong_guess;
+			cout << " guesses left." << endl;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
+			cout << "Press a key to guess again.";
+			system("pause>null");
+			system("cls");
+		}//end else
+	}
+
+	cin.ignore();
+	cin.get();
+}
+int letterFill(char guess, string secretword, string& guessword)
+{
+	//variables
+	//coded by Luke Martin
+	int i;
+	int matches = 0;
+	int len = secretword.length();
+	for (i = 0; i < len; i++)									//For Loop
+	{
+		// Checks if letter already exists
+		if (guess == guessword[i])
+			return 0;
+		//end if
+		// Checks if letter is in the word
+		if (guess == secretword[i])								//string operation
+		{
+			guessword[i] = guess;
+			matches++;
+		}//end if
+	}//end for
+	return matches;
 }

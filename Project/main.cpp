@@ -10,7 +10,7 @@ bool hangmanCompleted = FALSE;
 const int necessaryCompletions = 4;
 char menuControl{};
 //functions
-void startout(char enter, fstream& start);
+void startout(char enter, fstream& start, string& Cname);
 void displayMainMenu(int&, string&);
 void enterNaridge();
 void writeFeedback();
@@ -26,16 +26,8 @@ int main()
 	fstream start;
 	int successfulCompletions = 0;
 	char enter{};
-	
-	startout(enter, start);
-	cout << "Welcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
-	cin.ignore();
-	getline(cin, Cname);
-	cout << "\nWelcome, " << Cname << " to Naridge Gatehouse, it is from here that most begin their trial of entry." << endl;
-	cout << "Here at the Gatehouse we control all entry to the city through our trials" << endl;
-	cout << "It is a simple system, pass all four trials, each earning you a completion plaque." << endl << "Turn 4 plaques in at the Gatehouse and obtain entry, or give up prior and leave in shame" << endl << endl << "Press any key to enter trial selection";;
-	system("pause>null");
-	
+
+	startout(enter, start, Cname);
 	do
 	{
 		displayMainMenu(successfulCompletions, Cname);
@@ -46,7 +38,7 @@ int main()
 	return 0;
 }
 
-void startout(char enter, fstream& start)
+void startout(char enter, fstream& start,string& Cname)
 {
 	start.open("start.txt", ios::in);
 	if (start.fail())
@@ -72,6 +64,13 @@ void startout(char enter, fstream& start)
 	if (enter == 'y' || enter == 'Y')
 	{
 		system("cls");
+		cout << "Welcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
+		cin.ignore();
+		getline(cin, Cname);
+		cout << "\nWelcome, " << Cname << " to Naridge Gatehouse, it is from here that most begin their trial of entry." << endl;
+		cout << "Here at the Gatehouse we control all entry to the city through our trials" << endl;
+		cout << "It is a simple system, pass all four trials, each earning you a completion plaque." << endl << "Turn 4 plaques in at the Gatehouse and obtain entry, or give up prior and leave in shame" << endl << endl << "Press any key to enter trial selection";;
+		system("pause>null");
 	}
 	else
 	{

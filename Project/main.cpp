@@ -111,6 +111,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		}
 		case '2':
 		{
+			incrementCompletions(successfulCompletions);
 			break;
 		}
 		case '3':

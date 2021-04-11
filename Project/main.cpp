@@ -13,13 +13,13 @@ bool nateCompleted = FALSE;
 const int necessaryCompletions = 4;
 char menuControl{};
 //functions
-void startout(char enter, fstream& start, string& Cname);
-void displayMainMenu(int&, string&);
+void startout(char enter, fstream& start, string& Cname); //+1 void function passes by value and reference
+void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
-int incrementCompletions(int&);
+int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit();
-int letterFill(char, string, string&); 
+int letterFill(char, string, string&);				      //+1 value returning	
 void playhangman(int&, string&);
 
 
@@ -32,7 +32,7 @@ int main()
 	char enter{};
 
 	startout(enter, start, Cname);
-	do                                                    //Do-While Repetition Structure
+	do                                                    //Do-While Repetition Structure +1
 	{
 		displayMainMenu(successfulCompletions, Cname);
 	}while (menuControl != 9);//end do while
@@ -42,10 +42,10 @@ int main()
 	return 0;
 }
 
-void startout(char enter, fstream& start,string& Cname)
+void startout(char enter, fstream& start,string& Cname)  
 {
 	//Coded by: Luke Martin
-	start.open("start.txt", ios::in);   //inputs initial output/setsup story
+	start.open("start.txt", ios::in);   //inputs initial output/setsup story +1 imput file
 	if (start.fail())					//error checks if file					
 	{
 		cout << "start.txt failed to open, please check the file." << endl << "Press any key to leave the program.";
@@ -65,7 +65,7 @@ void startout(char enter, fstream& start,string& Cname)
 	if (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N')
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-		do								//Do-While Repetition Structure
+		do								//Do-While Repetition Structure +1
 		{
 			cout << "You must choose to either undertake the trials, or never return!(Y/N): ";
 			cin >> enter;
@@ -288,7 +288,7 @@ void writeFeedback()
  //takes user's input, and keeps it in a file FeedbackOut
 	string feedback;
 	fstream feedbackOut;
-	feedbackOut.open("FeedbackOut.txt", ios::out);
+	feedbackOut.open("FeedbackOut.txt", ios::out);						//+1 output file
 	if (feedbackOut.fail())//checks for failed opening of file
 	{//output
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -345,8 +345,8 @@ void playhangman(int& successfulCompletions, string& Cname)
 	char letter{};
 	int wrong_guess = 0;
 	string word;
-	string words[SIZE];										//one dimensional array
-	fstream hangmanwords;									//input file
+	string words[SIZE];										//+1 one dimensional array
+	fstream hangmanwords;									//+1 input file
 	//open file to obatin words
 	hangmanwords.open("words.txt");
 	//if else for error checking
@@ -357,7 +357,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 	}
 	else
 	{
-		while (!hangmanwords.eof() && i < SIZE)				//While loop & checks  for EOF
+		while (!hangmanwords.eof() && i < SIZE)				//+1 While loop & checks  for EOF
 		{
 			getline(hangmanwords, words[i]);
 			++i;
@@ -373,7 +373,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 	//sets word to be hidden by underscores
 	string unknown(word.length(), '_');
 	//while loop for program execution		
-	while (wrong_guess < MAX_TRIES)							//While Loop
+	while (wrong_guess < MAX_TRIES)							//+1 While Loop
 	{
 		//outputs heading with color
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
@@ -485,16 +485,16 @@ int letterFill(char guess, string secretword, string& guessword)
 	int i;
 	int matches = 0;
 	int len = secretword.length();
-	for (i = 0; i < len; i++)									//For Loop
+	for (i = 0; i < len; i++)									//+1 For Loop
 	{
 		// Checks if letter already exists
 		if (guess == guessword[i])
 			return 0;
 		//end if
 		// Checks if letter is in the word
-		if (guess == secretword[i])								//string operation
+		if (guess == secretword[i])								
 		{
-			guessword[i] = guess;
+			guessword[i] = guess;							    //+1 string operation
 			matches++;
 		}//end if
 	}//end for

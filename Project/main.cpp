@@ -12,7 +12,7 @@ char menuControl{};
 //functions
 void startout(char enter, fstream& start, string& Cname);
 void displayMainMenu(int&, string&);
-void enterNaridge();
+void enterNaridge(string&);
 void writeFeedback();
 int incrementCompletions(int&);
 int cowardlyExit();
@@ -22,16 +22,17 @@ void playhangman(int&, string&);
 
 int main() 
 {
+	//variables
 	string Cname;
 	fstream start;
 	int successfulCompletions = 0;
 	char enter{};
 
 	startout(enter, start, Cname);
-	do
+	do                                                    //Do-While Repetition Structure
 	{
 		displayMainMenu(successfulCompletions, Cname);
-	}while (menuControl != 9);
+	}while (menuControl != 9);//end do while
 	
 	
 	system("pause>null");
@@ -40,67 +41,85 @@ int main()
 
 void startout(char enter, fstream& start,string& Cname)
 {
-	start.open("start.txt", ios::in);
-	if (start.fail())
+	//Coded by: Luke Martin
+	start.open("start.txt", ios::in);   //inputs initial output/setsup story
+	if (start.fail())					//error checks if file					
 	{
 		cout << "start.txt failed to open, please check the file." << endl << "Press any key to leave the program.";
 		system("pause>null");
 		exit(0);
 	}
-	else
+	else								//outputs in color
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
 		cout << start.rdbuf();
 		start.close();
-	}
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+		cout << "Are you amoungst the bravest of souls who will attempt this trial ? (Y / N) : ";
+	}//end if else
 	cin >> enter;
+										//if structure to enter next section
 	if (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N')
 	{
-		do
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+		do								//Do-While Repetition Structure
 		{
 			cout << "You must choose to either undertake the trials, or never return!(Y/N): ";
 			cin >> enter;
-		} while (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N');
+		} while (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N');//end do while
 	}
-	if (enter == 'y' || enter == 'Y')
-	{
+	else if (enter == 'y' || enter == 'Y')
+	{//prompts user to enter their name, and provides information on how the Trials system functions
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
 		system("cls");
-		cout << "Welcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
+		cout << "\nWelcome, Brave Adventurer! What should we call you by when we record you in the annals? ";
 		cin.ignore();
 		getline(cin, Cname);
+		cout << "\n***********************************************************************************************************************";
 		cout << "\nWelcome, " << Cname << " to Naridge Gatehouse, it is from here that most begin their trial of entry." << endl;
-		cout << "Here at the Gatehouse we control all entry to the city through our trials" << endl;
-		cout << "It is a simple system, pass all four trials, each earning you a completion plaque." << endl << "Turn 4 plaques in at the Gatehouse and obtain entry, or give up prior and leave in shame" << endl << endl << "Press any key to enter trial selection";;
+		cout << "Here at the Gatehouse we control all entry to the city through our trials." << endl;
+		cout << "It is a simple system; pass all four trials, each earning you a completion plaque." << endl << "Turn 4 plaques in at the Gatehouse and obtain entry, or give up prior and leave in shame." << endl;
+		cout << "***********************************************************************************************************************";
+		cout << "\n\nPress any key to enter trial selection";
 		system("pause>null");
 	}
 	else
-	{
-		cout << "\n---------------------------------------------------------------------------------";
+	{//allows for user to leave the program before reaching the trials
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+		cout << "\n__________________________________________________________________________________________________________";
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
 		cout << "\n\nA sad day indeed, though perhaps, the decision shows wisdom beyond the average soul." << endl << "Go on, live your life, do not regret the choice you made here today." << endl;
 		cout << "Press any key to leave";
 		system("pause>null");
-		exit(1);
-	}
+		exit(0);
+	}//end else if
 }
 
 void displayMainMenu(int& successfulCompletions, string& Cname)
 {
+	/*coded by: Luke Martin
+	Displays the Menu, and contains the switch structure that runs the program*/
 		system("cls");
-		cout << "Press the number in the [] in order to select a trial, or check your progress towards admission" << endl << endl;
-		cout << "[1]" << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
+		cout << "Press the number in the [] in order to select a trial, or check your progress towards admission\nEach trial may only be completed once.";
+		cout << "\n__________________________________________________________________________________________________________" << endl << endl;
+		cout << "[1] A trial of Words and Wits" << endl;
 		cout << "[2]" << endl;
 		cout << "[3]" << endl;
 		cout << "[4]" << endl;
 		cout << "[5] Select this to check how many completions you are from finishing; or if finished, to enter the city" << endl;
-		cout << "[9] Select this only if you have decided to give up on the trials; There is no going back" << endl << endl;
+		cout << "[9] Select this only if you have decided to give up on the trials; There is NO going back" << endl << endl;
 		cout << "Please select an option: ";
 		cin >> menuControl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
-		switch (menuControl)
+		switch (menuControl)//switch structure
 		{
 		case '1':
-		{
+		{//if else that begins the "hangman" game, has a boolean that prevents trials from being completed more than once
 			if (hangmanCompleted == TRUE)
 			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
 				cout << "\nYou have already completed this Trial, you cannot retake a completed Trial." << "\nPress any key to return to Trial selection";
 				system("pause>null");
 			}
@@ -123,14 +142,16 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			break;
 		}
 		case '5':
-		{
+		{//Used to "win" the journey, each program increments a value when successfully completed.
+		 //When equal to 4 you can move you, otherwise tells user how many more completions they need.
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
 			if (successfulCompletions == 4)
 			{
-				enterNaridge();
+				enterNaridge(Cname);
 			}
 			else
 			{
-				cout << "\nYou have not collected enough completion plaques yet:" << endl << endl;
+				cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 				if (successfulCompletions == 1)
 				{
 					cout << "You currently have 1 plaque.";
@@ -147,55 +168,70 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 				{
 					cout << " You need " << necessaryCompletions - successfulCompletions << " more plaques to gain entry to the city." << "\n\nPress any key to return to the menu";
 				}
+				cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 			}
 			system("pause>null");
 			break;
 		}
 		case '9':
-		{
+		{//exit if the user gives up before completing the 4 trials
 			cowardlyExit();
 			break;
 		}
 		default:
-		{
-			cout << "This is an invalid input, Please select a correct one next time" <<endl;
-			cout << "Make an input to get another chance";
+		{//prevents the user from breaking the program through invalid inputs
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+			cout << "\nThis is an invalid input; Please select a correct one next time." <<endl;
+			cout << "Make an input to get another chance.";
 			system("pause>null");
 			system("cls");
 		}
-		}
+		}//end switch
 
 }
 
 int incrementCompletions(int &successfulCompletions)
-{
+{//coded by: Luke Martin
+ //Simple function that increments the "plaque" count, to be called in the successful running of each person's game
 	successfulCompletions += 1;
 	return successfulCompletions;
 }
 
-void enterNaridge()
+void enterNaridge(string& Cname)
 {
+	//coded by: Luke Martin
+	//called when all 4 plaques have been obtained
+	//local varialbe for program execution
 	char enterNar{};
 	system("cls");
-	cout << "Congratualtions!!!!! You have succesfully passed the four entrance trials" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
+	//output
+	cout << "***********************************************************************************************************************";
+	cout << "\n\t\t\t\t\t\tCongratulations!!!!!\n\n" << Cname <<", you have succesfully passed the four entrance trials!" << endl;
 	cout << "\n[1] If you would like to provide feedback on the trials prior to entering the city" << endl;
 	cout << "[2] If you would prefer to enter the city without providing feedback";
+	cout << "\n***********************************************************************************************************************";
 	cout << "\n\nPlease select your method of entry: ";
 	cin >> enterNar;
-
-	switch (enterNar)
+	
+	switch (enterNar)											//Switch Structure
 	{
 	case '1': 
-	{
+	{//this option allows for the user to provide feedback on the program
+		system("cls");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+		cout << "\n***********************************************************************************************************************\n";
+		//calls function for feedback
 		writeFeedback();
-		cout << "Thank you so much for your feedback; We hope your life in Naridge is fruitful!" << endl;
+		cout << "Thank you so much for your feedback. We hope your life in Naridge is fruitful!" << endl;
 		system("pause>null");
 		exit(1);
 		break;
 	}
 	case '2':
-	{
+	{//option allows for the user to skip feedback and exit the program
 		system("cls");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 		cout << "Please go right through then, I hope your time in Naridge is everything you dreamed of; you've certainly earned it." << endl << endl; 
 		cout << "*Program will close on keyboard input*";
 		system("pause>null");
@@ -203,50 +239,58 @@ void enterNaridge()
 		break;
 	}
 	default:
-	{
-		cout << "This is an invalid input, Please select a correct one next time" << endl;
+	{//error checking
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+		cout << "\nThis is an invalid input, Please select a correct one next time" << endl;
 		cout << "Make an input to get another chance";
 		system("pause>null");
 		system("cls");
-		enterNaridge();
+		enterNaridge(Cname);
 	}
-	}
+	}//end switch
 
 }
 void writeFeedback()
-{
+{//coded by: Luke Martin
+ //takes user's input, and keeps it in a file FeedbackOut
 	string feedback;
 	fstream feedbackOut;
 	feedbackOut.open("FeedbackOut.txt", ios::out);
-	if (feedbackOut.fail())
-	{
-		cout << "Advice.txt failed to open, please check the file." << endl;
+	if (feedbackOut.fail())//checks for failed opening of file
+	{//output
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+		cout << "Advice.txt failed to open, Feedback will not be available at this time. " << endl;
 		cout << "Congratulations again on surpassing the trials, sorry our feedback system was not functional" << endl;
-		cout << "Have a great time! (Make any input to enter)";
+		cout << "Have a great time! (Make any input to enter Naridge)";
 		system("pause>null");
 		exit(1);
 	}
 	else
 	{
-		cout << endl << "**********************************************************************" << endl;
-		cout << "Please enter your feedback below. Your feedback may be as long as you need," << endl;
+		//provides instruction for the user
+		cout << "\nPlease enter your feedback below. Your feedback may be as long as you need," << endl;
 		cout << "and you can press the <Enter> key one time to type on the next line," << endl;
-		cout << "and input the <Enter> key twice to indicate the end of the input:" << endl << endl;
+		cout << "and input the <Enter> key twice to indicate the end of the input:" << endl;
+		cout <<"_______________________________________________________________________________________________________________________" << endl<<endl;
+		//clear whitespace after using cin, in order to use getline 
 		cin.ignore();
 		getline(cin, feedback);
-		while (feedback.length() > 0)
+		while (feedback.length() > 0)								//While-Loop repetition
 		{
 			feedbackOut << feedback << endl;
 			getline(cin, feedback);
-		}
-		cout << "**********************************************************************" << endl << endl;
+		}//end while
+		cout << "***********************************************************************************************************************" << endl << endl;
 		feedbackOut.close();
 	}
 
 }
 int cowardlyExit()
 {
+	//coded by Luke Martin
+	//function that is called if user leaves the program without obtaining 4 completions
 	system("cls");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	cout << "So this is the way it ends..." << endl << "GO!, Leave this place and never return." <<endl << endl << "Press any key to get out of my sight.";
 	menuControl = 9;
 	return 0;

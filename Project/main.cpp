@@ -7,6 +7,9 @@
 using namespace std;
 //global variables
 bool hangmanCompleted = FALSE;
+bool kendraCompleted = FALSE;
+bool garrettCompleted = FALSE;
+bool nateCompleted = FALSE;
 const int necessaryCompletions = 4;
 char menuControl{};
 //functions
@@ -130,15 +133,45 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		}
 		case '2':
 		{
-			incrementCompletions(successfulCompletions);
+			if(kendraCompleted == TRUE)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+				cout << "\nYou have already completed this Trial, you cannot retake a completed Trial." << "\nPress any key to return to Trial selection";
+				system("pause>null");
+			}
+			else
+			{
+
+			}
+			
 			break;
 		}
 		case '3':
 		{
+			if(garrettCompleted==TRUE)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+				cout << "\nYou have already completed this Trial, you cannot retake a completed Trial." << "\nPress any key to return to Trial selection";
+				system("pause>null");
+			}
+			else
+			{
+
+			}
 			break;
 		}
 		case '4':
 		{
+			if(nateCompleted==TRUE)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
+				cout << "\nYou have already completed this Trial, you cannot retake a completed Trial." << "\nPress any key to return to Trial selection";
+				system("pause>null");
+			}
+			else
+			{
+
+			}
 			break;
 		}
 		case '5':

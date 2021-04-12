@@ -406,9 +406,10 @@ void playhangman(int& successfulCompletions, string& Cname)
 		//users guess
 		cout << "\n\nGuess a letter: ";
 		cin >> letter;
-		if (isupper(letter)) letter = tolower(letter);
-		guesses.push_back(letter);
-		sort(guesses.begin(), guesses.end());
+
+		if (isupper(letter)) letter = tolower(letter);  //lets capitals be correct answers
+		guesses.push_back(letter);						//adds guesses to the end of the string		+string operation			
+		sort(guesses.begin(), guesses.end());			//sorts alphabetically						+string operation
 
 		// Fill secret word with letter if the guess is correct,
 		// otherwise increment the number of wrong guesses.

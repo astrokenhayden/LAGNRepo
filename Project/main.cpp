@@ -19,7 +19,7 @@ void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
 int incrementCompletions(int&);							  //+1 value returning
-int cowardlyExit();
+int cowardlyExit(string&);
 int letterFill(char, string, string&);				      //+1 value returning	
 void playhangman(int&, string&);
 
@@ -56,7 +56,7 @@ void startout(char enter, fstream& start,string& Cname)
 	else								//outputs in color
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
-		cout << start.rdbuf();
+		cout << "\n"<< start.rdbuf();
 		start.close();
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 		cout << "Are you amoungst the bravest of souls who will attempt this trial ? (Y / N) : ";
@@ -105,7 +105,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 	Displays the Menu, and contains the switch structure that runs the program*/
 		system("cls");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
-		cout << "Press the number in the [] in order to select a trial, or check your progress towards admission\nEach trial may only be completed once.";
+		cout << "\nPress the number in the [] in order to select a trial, or check your progress towards admission\nEach trial may only be completed once.";
 		cout << "\n__________________________________________________________________________________________________________" << endl << endl;
 		cout << "[1] A trial of Words and Wits" << endl;
 		cout << "[2]" << endl;
@@ -142,7 +142,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			}
 			else
 			{
-
+				incrementCompletions(successfulCompletions);
 			}
 			
 			break;
@@ -209,7 +209,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		}
 		case '9':
 		{//exit if the user gives up before completing the 4 trials
-			cowardlyExit();
+			cowardlyExit(Cname);
 			break;
 		}
 		default:
@@ -240,7 +240,7 @@ void enterNaridge(string& Cname)
 	system("cls");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
 	//output
-	cout << "***********************************************************************************************************************";
+	cout << "\n***********************************************************************************************************************";
 	cout << "\n\t\t\t\t\t\tCongratulations!!!!!\n\n" << Cname <<", you have succesfully passed the four entrance trials!" << endl;
 	cout << "\n[1] If you would like to provide feedback on the trials prior to entering the city" << endl;
 	cout << "[2] If you would prefer to enter the city without providing feedback";
@@ -258,6 +258,7 @@ void enterNaridge(string& Cname)
 		//calls function for feedback
 		writeFeedback();
 		cout << "Thank you so much for your feedback. We hope your life in Naridge is fruitful!" << endl;
+		cout << "*Program will close on keyboard input*";
 		system("pause>null");
 		exit(1);
 		break;
@@ -266,7 +267,7 @@ void enterNaridge(string& Cname)
 	{//option allows for the user to skip feedback and exit the program
 		system("cls");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-		cout << "Please go right through then, I hope your time in Naridge is everything you dreamed of; you've certainly earned it." << endl << endl; 
+		cout << "\nPlease go right through then, I hope your time in Naridge is everything you dreamed of; you've certainly earned it." << endl << endl; 
 		cout << "*Program will close on keyboard input*";
 		system("pause>null");
 		exit(1);
@@ -319,13 +320,21 @@ void writeFeedback()
 	}
 
 }
-int cowardlyExit()
+int cowardlyExit(string& Cname)
+//coded by Luke Martin
+//function that is called if user leaves the program without obtaining 4 completions
 {
-	//coded by Luke Martin
-	//function that is called if user leaves the program without obtaining 4 completions
+	//makes name uppercase to indicate anger
+	for_each(Cname.begin(), Cname.end(), [](char& c) 
+		{
+		c = toupper(c);
+		});
+
 	system("cls");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-	cout << "So this is the way it ends..." << endl << "GO!, Leave this place and never return." <<endl << endl << "Press any key to get out of my sight." << endl;
+	cout << "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+	cout << "\n\nSo this is the way it ends...\n" << endl << "GO " <<Cname<< '!'<<" \n\nLeave this place and never return." <<endl << endl << "Press any key to get out of my sight." << endl;
+	cout << "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 	menuControl = 9;
 	return 0;
 }
@@ -382,7 +391,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 		cout << "***********************************************************************************************************************";
 		cout << "\nWelcome " << Cname << " to a trial of words, Your only hint is that all apply to C++";
 		cout << "\n\nEach letter is represented by an underscore, your goal, to unveil the word before your guesses run out!";
-		cout << "\n\nWe suggest one letter a time, but you may enter more if you want! \nBe warned, if you are fool enough to enter the same letter twice; it shall count as an incorrect input the second time!";
+		cout << "\n\nWe suggest one letter a time, but you may enter more if you want! \nIf you attempt to enter a letter you ahve already guessed, you will be prompted for a new input.";
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
 		if (MAX_TRIES - wrong_guess == 1)						//If statement
@@ -413,7 +422,20 @@ void playhangman(int& successfulCompletions, string& Cname)
 		//users guess
 		cout << "\n\nGuess a letter: ";
 		cin >> letter;
-
+		//copmares the input against the string of guesses to determine if the new guesses is already present or not
+		for (int k = 0; k < guesses.size(); k++)
+		{
+			
+			if (letter == guesses[k])
+			{
+				do 
+				{
+					cout << "\nYou have already guessed this letter! Please enter a unique input: ";
+					cin >> letter;
+				} while (letter == guesses[k]);
+			}
+			
+		}
 		if (isupper(letter)) letter = tolower(letter);  //lets capitals be correct answers
 		guesses.push_back(letter);						//adds guesses to the end of the string		+string operation			
 		sort(guesses.begin(), guesses.end());			//sorts alphabetically						+string operation

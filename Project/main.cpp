@@ -400,7 +400,14 @@ void playhangman(int& successfulCompletions, string& Cname)
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 		//displays the hidden word/whatever revealed letters each time
-		cout << "\nThese are your guesses in alphabetical order: " << guesses;
+		cout << "\nThese are your guesses in alphabetical order: ";
+		for (int j = 0; j < guesses.size(); j++)		//outputs the letters user guesses in alphabetical order with comma separating. 
+		{
+			cout << guesses[j];
+			cout << ", ";
+		
+		}
+
 		cout << "\n\n" << unknown;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
 		//users guess

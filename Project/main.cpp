@@ -4,6 +4,7 @@
 #include<windows.h>
 #include<cstdlib>
 #include<ctime>
+#include<algorithm>
 using namespace std;
 //global variables
 bool hangmanCompleted = FALSE;
@@ -324,7 +325,7 @@ int cowardlyExit()
 	//function that is called if user leaves the program without obtaining 4 completions
 	system("cls");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-	cout << "So this is the way it ends..." << endl << "GO!, Leave this place and never return." <<endl << endl << "Press any key to get out of my sight.";
+	cout << "So this is the way it ends..." << endl << "GO!, Leave this place and never return." <<endl << endl << "Press any key to get out of my sight." << endl;
 	menuControl = 9;
 	return 0;
 }
@@ -344,6 +345,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 	const int MAX_TRIES = 5;
 	char letter{};
 	int wrong_guess = 0;
+	string guesses;
 	string word;
 	string words[SIZE];										//+1 one dimensional array
 	fstream hangmanwords;									//+1 input file
@@ -398,11 +400,15 @@ void playhangman(int& successfulCompletions, string& Cname)
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 		//displays the hidden word/whatever revealed letters each time
+		cout << "\nThese are your guesses in alphabetical order: " << guesses;
 		cout << "\n\n" << unknown;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
 		//users guess
 		cout << "\n\nGuess a letter: ";
 		cin >> letter;
+		if (isupper(letter)) letter = tolower(letter);
+		guesses.push_back(letter);
+		sort(guesses.begin(), guesses.end());
 
 		// Fill secret word with letter if the guess is correct,
 		// otherwise increment the number of wrong guesses.

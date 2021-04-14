@@ -20,10 +20,11 @@ void enterNaridge(string&);
 void writeFeedback();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
-class hangman
+//class declaration for hangman
+class hangman											  //+1 class
 {
 public:
-	int letterFill(char, string, string&);				      //+1 value returning	
+	int letterFill(char, string, string&);				  
 	void playhangman(int&, string&);
 	void wordManip(char&, string&);
 private:
@@ -81,7 +82,7 @@ void startout(char enter, fstream& start,string& Cname)
 	if (enter != 'y' && enter != 'Y' && enter != 'n' && enter != 'N')
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-		do								//Do-While Repetition Structure +1
+		do																							//Do-While Repetition Structure +1
 		{
 			cout << "You must choose to either undertake the trials, or never return!(Y/N): ";
 			cin >> enter;
@@ -345,7 +346,7 @@ int cowardlyExit(string& Cname)
 	//makes name uppercase to indicate anger
 	for_each(Cname.begin(), Cname.end(), [](char& c) 
 		{
-		c = toupper(c);
+		c = toupper(c);												//+ 1 string operation
 		});
 
 	system("cls");

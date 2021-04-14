@@ -22,7 +22,7 @@ int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //class declaration for hangman
 class hangman											  //+1 class
-{
+{//coded By: Luke Martin
 public:
 	int letterFill(char, string, string&);				  
 	void playhangman(int&, string&);
@@ -136,7 +136,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		switch (menuControl)//switch structure
 		{
 		case '1':
-		{//if else that begins the "hangman" game, has a boolean that prevents trials from being completed more than once
+		{//if elsethat begins the "hangman" game, has a boolean that prevents trials from being completed more than once
 			if (hangmanCompleted == TRUE)
 			{
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
@@ -311,7 +311,7 @@ void writeFeedback()
 	fstream feedbackOut;
 	feedbackOut.open("FeedbackOut.txt", ios::out);						//+1 output file
 	if (feedbackOut.fail())//checks for failed opening of file
-	{//output
+	{//output exits program if input file doesn't open
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		cout << "Advice.txt failed to open, Feedback will not be available at this time. " << endl;
 		cout << "Congratulations again on surpassing the trials, sorry our feedback system was not functional" << endl;
@@ -441,7 +441,7 @@ void hangman::playhangman(int& successfulCompletions, string& Cname)
 		//users guess
 		cout << "\n\nGuess a letter: ";
 		cin >> letter;
-		//copmares the input against the string of guesses to determine if the new guesses is already present or not
+		//compares the input against the string of guesses to determine if the new guesses is already present or not
 		wordManip(letter, guesses);
 
 		// Fill secret word with letter if the guess is correct,
@@ -543,16 +543,19 @@ int hangman::letterFill(char guess, string secretword, string& guessword)
 
 void hangman::wordManip(char& letter, string& guesses)
 {
+	//coded by: Luke Martin
+	//compares the char input against the string that contains all of the previous guesses.
+	//utilizes a do while in order to allow for multiple duplicate inputs in a row.
 	for (int k = 0; k < guesses.size(); k++)
 	{
 
-		if (letter == guesses[k])
+		if (letter == guesses[k])					//if checks for equality
 		{
 			do
 			{
 				cout << "\nYou have already guessed this letter! Please enter a unique input: ";
 				cin >> letter;
-			} while (letter == guesses[k]);
+			} while (letter == guesses[k]);			//do while exit condition                   +do-while
 		}
 
 	}

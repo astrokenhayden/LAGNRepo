@@ -20,8 +20,23 @@ void enterNaridge(string&);
 void writeFeedback();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
-int letterFill(char, string, string&);				      //+1 value returning	
-void playhangman(int&, string&);
+class hangman
+{
+public:
+	int letterFill(char, string, string&);				      //+1 value returning	
+	void playhangman(int&, string&);
+	void wordManip(char&, string&);
+private:
+	static const int ARRSIZE = 30;
+	int i = 0;
+	const int MAX_TRIES = 5;
+	char letter{};
+	int wrong_guess = 0;
+	string guesses;
+	string word;
+	string words[ARRSIZE];										//+1 one dimensional array
+	fstream hangmanwords;
+};
 
 
 int main() 
@@ -128,7 +143,10 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 				system("pause>null");
 			}
 			else
-			playhangman(successfulCompletions, Cname);
+			{
+				hangman t;
+				t.playhangman(successfulCompletions, Cname);
+			}
 			
 			break;
 		}
@@ -339,7 +357,7 @@ int cowardlyExit(string& Cname)
 	return 0;
 }
 
-void playhangman(int& successfulCompletions, string& Cname)
+void hangman::playhangman(int& successfulCompletions, string& Cname)
 {
 
 //coded by Luke Martin
@@ -423,22 +441,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 		cout << "\n\nGuess a letter: ";
 		cin >> letter;
 		//copmares the input against the string of guesses to determine if the new guesses is already present or not
-		for (int k = 0; k < guesses.size(); k++)
-		{
-			
-			if (letter == guesses[k])
-			{
-				do 
-				{
-					cout << "\nYou have already guessed this letter! Please enter a unique input: ";
-					cin >> letter;
-				} while (letter == guesses[k]);
-			}
-			
-		}
-		if (isupper(letter)) letter = tolower(letter);  //lets capitals be correct answers
-		guesses.push_back(letter);						//adds guesses to the end of the string		+string operation			
-		sort(guesses.begin(), guesses.end());			//sorts alphabetically						+string operation
+		wordManip(letter, guesses);
 
 		// Fill secret word with letter if the guess is correct,
 		// otherwise increment the number of wrong guesses.
@@ -514,7 +517,7 @@ void playhangman(int& successfulCompletions, string& Cname)
 	cin.ignore();
 	cin.get();
 }
-int letterFill(char guess, string secretword, string& guessword)
+int hangman::letterFill(char guess, string secretword, string& guessword)
 {
 	//variables
 	//coded by Luke Martin
@@ -535,5 +538,25 @@ int letterFill(char guess, string secretword, string& guessword)
 		}//end if
 	}//end for
 	return matches;
+}
+
+void hangman::wordManip(char& letter, string& guesses)
+{
+	for (int k = 0; k < guesses.size(); k++)
+	{
+
+		if (letter == guesses[k])
+		{
+			do
+			{
+				cout << "\nYou have already guessed this letter! Please enter a unique input: ";
+				cin >> letter;
+			} while (letter == guesses[k]);
+		}
+
+	}
+	if (isupper(letter)) letter = tolower(letter);  //lets capitals be correct answers
+	guesses.push_back(letter);						//adds guesses to the end of the string		+string operation			
+	sort(guesses.begin(), guesses.end());			//sorts alphabetically						+string operation
 }
 

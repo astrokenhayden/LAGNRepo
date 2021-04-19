@@ -740,7 +740,7 @@ rollDie:
 }
 
 void TicTacToeGame(string& Cname) {
-
+	// Coded by Kendra Hayden 
 	//Kendra Hayden variables
 	int r;
 	int c;
@@ -754,9 +754,9 @@ void TicTacToeGame(string& Cname) {
 		cout << "Hello, " << Cname << " choose your coordinates: ";
 		cin >> r >> c;
 		cout << endl;
-		game.getXOMove(r, c);
+		game.getXOMove(r, c); // Placing the player move
 
-		while (!game.isValidMove() || game.isFull()) {
+		while (!game.isValidMove() || game.isFull()) { // IF said move was invalid, we are going to do it again
 			cout << "Player, please choose a VALID spot: ";
 			cin >> r >> c;
 			game.getXOMove(r, c);
@@ -774,13 +774,18 @@ void TicTacToeGame(string& Cname) {
 		}
 
 		game.displayBoard();
+
 		system("cls");
-		cout << "It's the goblin's turn now..." << endl;
+
+		cout << "It's the goblin's turn now..." << endl; // The Goblin is the computer 
 		game.comPlayerNumbers();
+		while (!game.isValidMove() || game.isFull()) { // Making sure the computer will give a different move and not overwrite. 
+			game.comPlayerNumbers(); 
+		}
 		game.play('O');
 		game.displayBoard();
 
-		game.gameStatus('O');
+		game.gameStatus('O'); // These are the check again 
 		game.gameStatus('X');
 		system("cls");
 	}

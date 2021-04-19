@@ -1,4 +1,5 @@
 #pragma once
+// Program by Kendra Hayden 
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -29,8 +30,16 @@ public:
 };
 void HaydenGame::comPlayerNumbers() {
     // player o is always the computer
+    srand((unsigned int)time(NULL)); 
     m_XO = rand() % 4;
     m_OX = rand() % 4;
+
+    if(isFull()) { // whenever I check in the MAIN function it messes up, so we are doing this in order to get a somewhat rand number
+        srand((unsigned int)time(NULL));
+        m_XO = rand() % 4;
+        m_OX = rand() % 4;
+    }
+
 
 
 }
@@ -81,49 +90,49 @@ void HaydenGame::displayBoard() {
 
 }
 
-bool HaydenGame::gameStatus(char player) {
+bool HaydenGame::gameStatus(char player) { //we are checking the values 
 
-    winner = ' ';
+   
     bool alert = false;
 
     if ((board[0][0] == player) && (board[0][1] == player) && (board[0][2] == player)) {
-        winner = player;
+     
         alert = true;
     }
     else if ((board[0][0] == player) && (board[1][0] == player) && (board[2][0] == player)) {
-        winner = player;
+      
         alert = true;
     }
     else if ((board[0][1] == player) && (board[1][1] == player) && (board[2][1] == player)) {
-        winner = player;
+   
         alert = true;
     }
     else if ((board[0][2] == player) && (board[1][2] == player) && (board[2][2] == player)) {
-        winner = player;
+       
         alert = true;
     }
     else if ((board[1][0] == player) && (board[1][1] == player) && (board[1][2] == player)) {
-        winner = player;
+       
         alert = true;
 
     }
     else if ((board[2][0] == player) && (board[2][1] == player) && (board[2][2] == player)) {
-        winner = player;
+      
         alert = true;
     }
     else if ((board[0][2] == player) && (board[1][1] == player) && (board[2][0] == player)) {
-        winner = player;
+        
         alert = true;
     }
     else if ((board[0][0] == player) && (board[1][1] == player) && (board[2][2] == player)) {
-        winner = player;
+      
         alert = true;
     }
 
     return alert;
 
 }
-bool HaydenGame::isValidMove() {
+bool HaydenGame::isValidMove() { //is it valid??
 
     bool gameResult = false;
 
@@ -136,7 +145,7 @@ bool HaydenGame::isValidMove() {
 
     return gameResult;
 }
-bool HaydenGame::isFull() {
+bool HaydenGame::isFull() { // does that have a x or o on the mark 
     if (board[m_XO - 1][m_OX - 1] == 'X' || board[m_XO - 1][m_OX - 1] == 'O') {
         return true;
     }
@@ -144,7 +153,7 @@ bool HaydenGame::isFull() {
         return false;
     }
 }
-void HaydenGame::getXOMove(int XO, int OX) {
+void HaydenGame::getXOMove(int XO, int OX) { // getting the moves 
     m_XO = XO;
     m_OX = OX;
 

@@ -18,6 +18,8 @@ void startout(char enter, fstream& start, string& Cname); //+1 void function pas
 void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
+void displaygarrettsSegment();
+void rollDie();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //class declaration for hangman
@@ -39,11 +41,11 @@ private:
 	fstream hangmanwords;
 };
 
+string Cname; //Made this a global to work with Garrett's story function
 
 int main() 
 {
 	//variables
-	string Cname;
 	fstream start;
 	int successfulCompletions = 0;
 	char enter{};
@@ -562,5 +564,169 @@ void hangman::wordManip(char& letter, string& guesses)
 	if (isupper(letter)) letter = tolower(letter);  //lets capitals be correct answers
 	guesses.push_back(letter);						//adds guesses to the end of the string		+string operation			
 	sort(guesses.begin(), guesses.end());			//sorts alphabetically						+string operation
+}
+
+
+void displaygarrettsSegment() {
+
+	//coded by: Garrett Wolak
+	//Function that contains Garrett's Story Segment.
+	//Includes progressive dialog that user manually clicks through in order to keep reading.
+	
+	cout << endl;
+
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(h, 2);
+
+	cout << "You continue down the road for some time before you come across a gang of bandits." << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << "You decide to approach them as they are in your way and you need to pass to continue your journey." << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << "As you approach, the presumptive leader of the bandits begins to walk towards you with a menacing look on his face." << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << '"' << "Who are you?" << '"' << " the bandit asks." << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << "Afraid to upset the big hairy beast of a man, you tell him. " << '"' << "My name is " << Cname << '.' << '"' << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << '"' << "Well hello there " << Cname << '.' << '"' << " the bandit says. " << '"' << "If you want to pass, your gonna have to play a game hehe." << '"' << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << "Since it appears you have no choice, and there are far too many bandits for you to take on by yourself, you decide to take the man up on his offer." << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << '"' << "What kind of game?" << '"' << " you ask. " << '"' << "It's really straight forward" << '"' << " the man states. " << endl << endl; 
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << '"' << "All you have to do is roll this six sided die. If you roll an even number, you get to pass unscathed." << '"' << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << '"' << "On the other hand, if you are unfortunate enough to roll an odd number, your journey ends here hehe." << '"' << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	system("pause");
+	cout << endl;
+	SetConsoleTextAttribute(h, 2);
+
+	cout << "Confident you will be able to beat the odds, you roll the die." << endl << endl;
+
+	SetConsoleTextAttribute(h, 3);
+	cout << "Press any key to roll the die . . .";
+	system("pause>nul");
+	cout << endl << endl;
+
+	rollDie(); // Function to roll the die and continue the story.
+
+}
+
+void rollDie() {
+
+	//coded by: Garrett Wolak
+	// Function to roll a six sided die.
+	//If the user rolls an even number, their story continues onto Kendras Story Segment
+	//If the user rolls an odd number, they lose the game but can easily re-roll to eventually move on in the story without completely restarting.
+	
+rollDie:
+
+	int dieResult;
+	
+	//Loop to roll a simulated six sided die. 
+	srand(time(0));
+	for (int i = 0; i < 1; i++)
+	{
+		dieResult = (int)(1 + rand() % 6);
+
+	}
+
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(h, 7);
+
+	cout << "You rolled a: " << dieResult << endl;
+
+	//Decides if the user won or lost and if they need to re-roll in order to progress.
+	if (dieResult == 2 || dieResult == 4 || dieResult == 6) {
+
+		HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(h, 7);
+
+		cout << "Congratulations! You Won! Your Journey Continues!" << endl << endl;
+
+		SetConsoleTextAttribute(h, 2);
+
+		cout << "You rolled a " << dieResult << " so the bandits honored there promise and let you pass unharmed." << endl << endl;
+
+		SetConsoleTextAttribute(h, 3);
+		system("pause");
+		cout << endl;
+		SetConsoleTextAttribute(h, 2);
+
+		cout << "You journey now continues as you once again head down the long road." << endl << endl;
+
+		SetConsoleTextAttribute(h, 3);
+		cout << "End of Garrett's Story Segment"; // End of Garrett's Story Segment
+		system("pause>nul");
+		cout << endl << endl;
+
+	}
+	else {
+
+		HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(h, 7);
+
+		cout << "Sorry you Lose. :( " << endl << endl;
+
+		SetConsoleTextAttribute(h, 2);
+
+		cout << "You rolled a " << dieResult << " so the bandits demolished you and took all of your belongings." << endl << endl;
+
+		SetConsoleTextAttribute(h, 3);
+		cout << "Press any key to try rolling again . . .";
+		system("pause>nul");
+		cout << endl << endl;
+
+		goto rollDie; // So the user can try again and re-roll the die 
+
+	}
+
 }
 

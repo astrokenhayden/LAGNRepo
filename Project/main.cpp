@@ -23,6 +23,8 @@ void displaygarrettsSegment();
 void rollDie();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
+//Kendra Hayden Functions 
+void HaydenGameDisplay(string&);
 void TicTacToeGame(string&); 
 //class declaration for hangman
 class hangman											  //+1 class
@@ -170,6 +172,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			else
 			{
 				// Kendra Hayden's Part of adding in COMPUTER VS PLAYER
+				HaydenGameDisplay(Cname); 
 				TicTacToeGame(Cname);
 
 				incrementCompletions(successfulCompletions);
@@ -738,7 +741,12 @@ rollDie:
 	}
 
 }
-
+void HaydenGameDisplay(string& Cname) {
+	cout << "Welcome to A TRIAL OF X's and O's. Here you will be going against a goblin named Mako." << endl;
+	cout << "There is hope, " << Cname << ", that you do not fail against him. Although, Mako is harsh with his O's. " << endl; 
+	cout << "If you win, you will never have to see Mako again... Let's hope you never see Mako again..." << endl;
+	cout << "Try your best, " << Cname << "." << endl; 
+}
 void TicTacToeGame(string& Cname) {
 	// Coded by Kendra Hayden 
 	//Kendra Hayden variables
@@ -777,7 +785,7 @@ void TicTacToeGame(string& Cname) {
 
 		system("cls");
 
-		cout << "It's the goblin's turn now..." << endl; // The Goblin is the computer 
+		cout << "It's Mako's turn now..." << endl; // The Goblin is the computer 
 		game.comPlayerNumbers();
 		while (!game.isValidMove() || game.isFull()) { // Making sure the computer will give a different move and not overwrite. 
 			game.comPlayerNumbers(); 
@@ -790,4 +798,5 @@ void TicTacToeGame(string& Cname) {
 		system("cls");
 	}
 }
+
 

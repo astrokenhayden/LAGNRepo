@@ -5,6 +5,7 @@
 #include<cstdlib>
 #include<ctime>
 #include<algorithm>
+#include"haydengame.h"
 using namespace std;
 //global variables
 bool hangmanCompleted = FALSE;
@@ -22,6 +23,7 @@ void displaygarrettsSegment();
 void rollDie();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
+void TicTacToeGame(string&); 
 //class declaration for hangman
 class hangman											  //+1 class
 {//coded By: Luke Martin
@@ -49,6 +51,8 @@ int main()
 	fstream start;
 	int successfulCompletions = 0;
 	char enter{};
+
+	
 
 	startout(enter, start, Cname);
 	do                                                    //Do-While Repetition Structure +1
@@ -126,7 +130,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		cout << "\nPress the number in the [] in order to select a trial, or check your progress towards admission\nEach trial may only be completed once.";
 		cout << "\n__________________________________________________________________________________________________________" << endl << endl;
 		cout << "[1] A trial of Words and Wits" << endl;
-		cout << "[2]" << endl;
+		cout << "[2] A trial of X's and O's" << endl;
 		cout << "[3]" << endl;
 		cout << "[4]" << endl;
 		cout << "[5] Select this to check how many completions you are from finishing; or if finished, to enter the city" << endl;
@@ -156,13 +160,18 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		case '2':
 		{
 			if(kendraCompleted == TRUE)
-			{
+			{ 
+				
+
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
 				cout << "\nYou have already completed this Trial, you cannot retake a completed Trial." << "\nPress any key to return to Trial selection";
 				system("pause>null");
 			}
 			else
 			{
+				// Kendra Hayden's Part of adding in COMPUTER VS PLAYER
+				TicTacToeGame(Cname);
+
 				incrementCompletions(successfulCompletions);
 			}
 			
@@ -728,5 +737,52 @@ rollDie:
 
 	}
 
+}
+
+void TicTacToeGame(string& Cname) {
+
+	//Kendra Hayden variables
+	int r;
+	int c;
+
+	HaydenGame game;
+	// end Kendra Hayden Variables
+	
+
+	while (!game.gameStatus('O') || !game.gameStatus('X')) { //we are seeing when the game will end by a bool. 
+		game.displayBoard();
+		cout << "Hello, " << Cname << " choose your coordinates: ";
+		cin >> r >> c;
+		cout << endl;
+		game.getXOMove(r, c);
+
+		while (!game.isValidMove() || game.isFull()) {
+			cout << "Player, please choose a VALID spot: ";
+			cin >> r >> c;
+			game.getXOMove(r, c);
+			cout << endl;
+		}
+		game.play('X');
+		if (game.gameStatus('X'))
+		{
+			break;
+			cout << "A Player has won... \n Too bad it's you..." << endl;
+		}
+		if (game.gameStatus('O')) {
+			break;
+			cout << "A Player has won... \n Too bad it's NOT you... " << endl;
+		}
+
+		game.displayBoard();
+		system("cls");
+		cout << "It's the goblin's turn now..." << endl;
+		game.comPlayerNumbers();
+		game.play('O');
+		game.displayBoard();
+
+		game.gameStatus('O');
+		game.gameStatus('X');
+		system("cls");
+	}
 }
 

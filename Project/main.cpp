@@ -25,7 +25,7 @@ int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //Kendra Hayden Functions 
 void HaydenGameDisplay(string&);
-void TicTacToeGame(string&); 
+void TicTacToeGame(string&); // +1 for array
 //class declaration for hangman
 class hangman											  //+1 class
 {//coded By: Luke Martin

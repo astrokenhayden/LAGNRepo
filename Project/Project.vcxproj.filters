@@ -23,5 +23,8 @@
     <ClInclude Include="haydengame.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="nategame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

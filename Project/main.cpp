@@ -19,7 +19,7 @@ void startout(char enter, fstream& start, string& Cname); //+1 void function pas
 void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
-void displaygarrettsSegment();
+void displaygarrettsSegment(string&);
 void rollDie();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
@@ -45,7 +45,7 @@ private:
 	fstream hangmanwords;
 };
 
-string Cname; //Made this a global to work with Garrett's story function
+ 
 
 int main() 
 {
@@ -53,7 +53,7 @@ int main()
 	fstream start;
 	int successfulCompletions = 0;
 	char enter{};
-
+	string Cname;
 	
 
 	startout(enter, start, Cname);
@@ -579,7 +579,7 @@ void hangman::wordManip(char& letter, string& guesses)
 }
 
 
-void displaygarrettsSegment() {
+void displaygarrettsSegment(string&Cname) {
 
 	//coded by: Garrett Wolak
 	//Function that contains Garrett's Story Segment.

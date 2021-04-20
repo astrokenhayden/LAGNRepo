@@ -575,7 +575,7 @@ void hangman::wordManip(char& letter, string& guesses)
 	}
 	if (isupper(letter)) letter = tolower(letter);  //lets capitals be correct answers
 	guesses.push_back(letter);						//adds guesses to the end of the string		+string operation			
-	sort(guesses.begin(), guesses.end());			//sorts alphabetically						+string operation
+	sort(guesses.begin(), guesses.end());			//sorts alphabetically						+sort
 }
 
 

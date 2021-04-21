@@ -27,6 +27,7 @@ int cowardlyExit(string&);
 //Kendra Hayden Functions 
 void HaydenGameDisplay(string&);
 void TicTacToeGame(string&); // +1 for array
+void nategameDisplay(string&); 
 //class declaration for hangman
 class hangman											  //+1 class
 {//coded By: Luke Martin
@@ -63,7 +64,7 @@ int main()
 		displayMainMenu(successfulCompletions, Cname);
 	}while (menuControl != 9);//end do while
 	
-	displaygarrettsSegment(string&Cname);
+	displaygarrettsSegment(Cname);
 
 	
 	system("pause>null");

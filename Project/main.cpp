@@ -21,6 +21,7 @@ void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
 void displaygarrettsSegment(string&);
+void nategameDisplay(string&);
 void rollDie();
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
@@ -63,7 +64,7 @@ int main()
 		displayMainMenu(successfulCompletions, Cname);
 	}while (menuControl != 9);//end do while
 	
-	displaygarrettsSegment(string&Cname);
+
 
 	
 	system("pause>null");
@@ -193,7 +194,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			}
 			else
 			{
-
+				displaygarrettsSegment(Cname);
 			}
 			break;
 		}

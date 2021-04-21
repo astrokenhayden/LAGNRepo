@@ -20,9 +20,9 @@ void startout(char enter, fstream& start, string& Cname); //+1 void function pas
 void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
-void displaygarrettsSegment(string&);
+void displaygarrettsSegment(string&, int&);
 void nategameDisplay(string&);
-void rollDie();
+void rollDie(int&);
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //Kendra Hayden Functions 
@@ -195,7 +195,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			}
 			else
 			{
-				displaygarrettsSegment(Cname);
+				displaygarrettsSegment(Cname, successfulCompletions);
 			}
 			break;
 		}
@@ -601,7 +601,7 @@ void hangman::wordManip(char& letter, string& guesses)
 }
 
 
-void displaygarrettsSegment(string&Cname) {
+void displaygarrettsSegment(string&Cname, int& successfulCompletions) {
 
 	//coded by: Garrett Wolak
 	//Function that contains Garrett's Story Segment.
@@ -689,11 +689,11 @@ void displaygarrettsSegment(string&Cname) {
 	system("pause>nul");
 	cout << endl << endl;
 
-	rollDie(); // Function to roll the die and continue the story.
+	rollDie(successfulCompletions); // Function to roll the die and continue the story.
 
 }
 
-void rollDie() {
+void rollDie(int& successfulCompletions) {
 
 	//coded by: Garrett Wolak
 	// Function to roll a six sided die.
@@ -739,6 +739,8 @@ rollDie:
 		SetConsoleTextAttribute(h, 3);
 		cout << "End of Garrett's Story Segment"; // End of Garrett's Story Segment
 		system("pause>nul");
+		incrementCompletions(successfulCompletions);
+		garrettCompleted = TRUE;
 		cout << endl << endl;
 
 	}

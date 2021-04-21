@@ -217,6 +217,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 					
 					cout << "You have won this match!" << endl;
 					incrementCompletions(successfulCompletions);
+					nateCompleted = TRUE;
 					system("pause");
 					
 				}

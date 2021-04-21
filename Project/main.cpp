@@ -63,6 +63,8 @@ int main()
 		displayMainMenu(successfulCompletions, Cname);
 	}while (menuControl != 9);//end do while
 	
+	displaygarrettsSegment(string&Cname);
+
 	
 	system("pause>null");
 	return 0;

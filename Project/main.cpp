@@ -28,6 +28,7 @@ int cowardlyExit(string&);
 //Kendra Hayden Functions 
 void HaydenGameDisplay(string&);
 void TicTacToeGame(string&); // +1 for array
+void nategameDisplay(string&); 
 //class declaration for hangman
 class hangman											  //+1 class
 {//coded By: Luke Martin

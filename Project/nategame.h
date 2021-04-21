@@ -2,7 +2,7 @@
 #include <time.h>
 #include <conio.h>
 using namespace std;
-enum eDir { STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, RIGHT = 4, UPRIGHT = 5, DOWNRIGHT = 6 };
+enum eDir { STOP = 0, LEFT = 1, UPLEFT = 2, DOWNLEFT = 3, RIGHT = 4, UPRIGHT = 5, DOWNRIGHT = 6 }; // enum type +1 
 class cBall
 {
 private:
@@ -106,6 +106,15 @@ private:
 	cPaddle* player1;
 	cPaddle* player2;
 public:
+	//coded from line 110 - cGameManger by Kendra Hayden 
+	bool win() {
+		if (score1 == 7 || score2 == 7) {
+			return true; 
+		}
+		else {
+			return false; 
+		}
+	}
 	cGameManger(int w, int h)
 	{
 		srand(time(NULL));
@@ -221,6 +230,10 @@ public:
 
 			if (current == 'q')
 				quit = true;
+			if (score2 == 7) {
+				quit = true; 
+			}
+			
 		}
 	}
 	void Logic()
@@ -257,19 +270,21 @@ public:
 		if (ballx == 0)
 			ScoreUp(player2);
 	}
-	void Run()
+	bool Run()
 	{
 		while (!quit)
 		{
 			Draw();
 			Input();
 			Logic();
+			if (score1 == 7) {
+				return true; 
+			}
+			if (score2 == 7) {
+				return false; 
+			}
+
 		}
 	}
 };
-int main()
-{
-	cGameManger c(40, 20);
-	c.Run();
-	return 0;
-}
+// no main here 

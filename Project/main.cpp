@@ -6,7 +6,7 @@
 #include<ctime>
 #include<algorithm>
 #include"haydengame.h"
-//#include"nategame.h"
+#include"nategame.h"
 using namespace std;
 //global variables
 bool hangmanCompleted = FALSE;
@@ -134,8 +134,8 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		cout << "\n__________________________________________________________________________________________________________" << endl << endl;
 		cout << "[1] A trial of Words and Wits" << endl;
 		cout << "[2] A trial of X's and O's" << endl;
-		cout << "[3]" << endl;
-		cout << "[4]" << endl;
+		cout << "[3] " << endl;
+		cout << "[4] A Trial of Pong " << endl;
 		cout << "[5] Select this to check how many completions you are from finishing; or if finished, to enter the city" << endl;
 		cout << "[9] Select this only if you have decided to give up on the trials; There is NO going back" << endl << endl;
 		cout << "Please select an option: ";
@@ -205,7 +205,23 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			}
 			else
 			{
+				nategameDisplay(Cname); 
+				cGameManger c(40, 20);  // Nate's code
 
+				// To run the code; the if-else is coded by Kendra Hayden 
+				if (c.Run()) {
+					
+					cout << "You have won this match!" << endl;
+					incrementCompletions(successfulCompletions);
+					system("pause");
+					
+				}
+				else {
+					cout << "You have lost this match. Try again another time." << endl; 
+					system("pause"); 
+				}
+				
+				
 			}
 			break;
 		}
@@ -796,15 +812,18 @@ void TicTacToeGame(string& Cname) {
 
 		game.gameStatus('O'); // These are the check again 
 		game.gameStatus('X');
+		if (game.gameStatus('X')) {
+			kendraCompleted = true; 
+		}
 		system("cls");
 	}
 }
 // Coded by Nathan Pascoe
-//void nategameDisplay(string& Cname) {
-//
-//cout <<"Welcome to A TRIAL OF A GAME OF PONG. You will prepare to verse the final boss of this trial named Geng." << endl;
-//cout << "You got this, " << Cname << ", their is hope you can still take out this great master. Geng is a very good Pong Player." << endl;
-//cout << "If you beat Geng, you will never have to worry about another great master again..." << endl;
-//cout << "Go get him," << Cname << "-" << endl;
-//}
+void nategameDisplay(string& Cname) {
+
+cout <<"Welcome to A TRIAL OF A GAME OF PONG. You will prepare to verse the final boss of this trial named Geng." << endl;
+cout << "You got this, " << Cname << ", their is hope you can still take out this great master. Geng is a very good Pong Player." << endl;
+cout << "If you beat Geng, you will never have to worry about another great master again..." << endl;
+cout << "Go get him," << Cname << "-" << endl;
+}
 

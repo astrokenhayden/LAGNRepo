@@ -180,7 +180,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 				HaydenGameDisplay(Cname); 
 				TicTacToeGame(Cname);
 
-				incrementCompletions(successfulCompletions);
+				
 			}
 			
 			break;
@@ -210,6 +210,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			else
 			{
 				nategameDisplay(Cname); 
+				system("pause>null");
 				cGameManger c(40, 20);  // Nate's code
 
 				// To run the code; the if-else is coded by Kendra Hayden 

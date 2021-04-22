@@ -647,9 +647,10 @@ void displaygarrettsSegment(string&Cname, int& successfulCompletions) {
 	system("pause");
 	cout << endl;
 	SetConsoleTextAttribute(h, 2);
-
+	//reverse from <algorithim> added by Luke Martin												+string operation
+	reverse(Cname.begin(), Cname.end());
 	cout << '"' << "Well hello there " << Cname << '.' << '"' << " the bandit says. " << '"' << "If you want to pass, your gonna have to play a game hehe." << '"' << endl << endl;
-
+	reverse(Cname.begin(), Cname.end());
 	SetConsoleTextAttribute(h, 3);
 	system("pause");
 	cout << endl;

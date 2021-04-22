@@ -102,9 +102,9 @@ private:
 	int score1, score2;
 	char up1, down1, up2, down2;
 	bool quit;
-	cBall* ball;
-	cPaddle* player1;
-	cPaddle* player2;
+	cBall* ball;					//+pointer
+	cPaddle* player1;				//+ pointer
+	cPaddle* player2;				//+ pointer
 public:
 	//coded from line 110 - cGameManger by Kendra Hayden 
 	bool win() {
@@ -123,15 +123,15 @@ public:
 		down1 = 's'; down2 = 'k';
 		score1 = score2 = 0;
 		width = w; height = h;
-		ball = new cBall(w / 2, h / 2);
-		player1 = new cPaddle(1, h / 2 - 3);
-		player2 = new cPaddle(w - 2, h / 2 - 3);
+		ball = new cBall(w / 2, h / 2);						//+ pointer use
+		player1 = new cPaddle(1, h / 2 - 3);				//+ pointer use
+		player2 = new cPaddle(w - 2, h / 2 - 3);			//+ pointer use
 	}
 	~cGameManger()
 	{
 		delete ball, player1, player2;
 	}
-	void ScoreUp(cPaddle* player)
+	void ScoreUp(cPaddle* player)							//pointer passed to function
 	{
 		if (player == player1)
 			score1++;

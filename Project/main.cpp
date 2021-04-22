@@ -15,6 +15,9 @@ bool garrettCompleted = FALSE;
 bool nateCompleted = FALSE;
 const int necessaryCompletions = 4;
 char menuControl{};
+const int INIT = 5;
+int listArrayRand[INIT] = { 3245, 2134, 4341, 9, 10 }; 
+int aSearchNumber; 
 //functions
 void startout(char enter, fstream& start, string& Cname); //+1 void function passes by value and reference
 void displayMainMenu(int&, string&);					  //+1 void function
@@ -29,6 +32,8 @@ int cowardlyExit(string&);
 void HaydenGameDisplay(string&);
 void TicTacToeGame(string&, int&); // +1 for array
 void nategameDisplay(string&); 
+//BINARY SEARCH
+int binarySearch(int, int, int); 
 //class declaration for hangman
 class hangman											  //+1 class
 {//coded By: Luke Martin
@@ -387,9 +392,20 @@ int cowardlyExit(string& Cname)
 		});
 
 	system("cls");
+	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	cout << "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-	cout << "\n\nSo this is the way it ends...\n" << endl << "GO " <<Cname<< '!'<<" \n\nLeave this place and never return." <<endl << endl << "Press any key to get out of my sight." << endl;
+	cout << "\n\nSo since you choose this way to end...\n";
+	cout << endl << "You will undergo one more task as you've choosen a horrible way to leave. Give me a number: "; 
+	cin >> aSearchNumber; 
+	if (binarySearch(listArrayRand[INIT], INIT, aSearchNumber)) {
+		cout << "Wow, you have choosen a number in this pool of numbers that is correct... \n If only this gave you a chance to live... \n it doesn't... So LEAVE THIS CITY! " << endl;
+	}
+	else {
+		cout << "You really are a failure. " << Cname << ", how have you let yourself down until the very end. You choose the easy way out... Then you still lost...\n Get out of this city, COWARD!" << endl; 
+	}
+	cout << endl << "GO " << Cname << '!' << " \n\nLeave this place and never return." << endl << endl << "Press any key to get out of my sight." << endl;
+	
 	cout << "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 	menuControl = 9;
 	return 0;
@@ -840,4 +856,24 @@ cout << "Go get him, " << Cname << " - You play to 7" << endl;
 cout << "\nThe game is played using W and S to move your paddle up and down. \n";
 cout << "Press any key to enter the trial.";
 }//directions added by Luke Martin
+
+bool binarySearch(int list[], int length, int item) { 
+	int first = 0;
+	int last = length - 1; 
+	int mid; 
+
+	bool found = false;  
+	while (first <= last && !found) {
+		mid = (first + last) / 2;  
+		if (list[mid] == item) 
+			found = true;  
+		else if (list[mid] > item)  
+			last = mid - 1; 
+		else  first = mid + 1; 
+	} 
+	if (found) 
+		return true; 
+	else 
+		return false;
+} 
 

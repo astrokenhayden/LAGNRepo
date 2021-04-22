@@ -30,7 +30,7 @@ int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //Kendra Hayden Functions 
 void HaydenGameDisplay(string&);
-void TicTacToeGame(string&); // +1 for array
+void TicTacToeGame(string&, int&); // +1 for array
 void nategameDisplay(string&); 
 //BINARY SEARCH
 int binarySearch(int, int, int); 
@@ -183,7 +183,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			{
 				// Kendra Hayden's Part of adding in COMPUTER VS PLAYER
 				HaydenGameDisplay(Cname); 
-				TicTacToeGame(Cname);
+				TicTacToeGame(Cname, successfulCompletions);
 
 				
 			}
@@ -663,9 +663,10 @@ void displaygarrettsSegment(string&Cname, int& successfulCompletions) {
 	system("pause");
 	cout << endl;
 	SetConsoleTextAttribute(h, 2);
-
+	//reverse from <algorithim> added by Luke Martin												+string operation
+	reverse(Cname.begin(), Cname.end());
 	cout << '"' << "Well hello there " << Cname << '.' << '"' << " the bandit says. " << '"' << "If you want to pass, your gonna have to play a game hehe." << '"' << endl << endl;
-
+	reverse(Cname.begin(), Cname.end());
 	SetConsoleTextAttribute(h, 3);
 	system("pause");
 	cout << endl;
@@ -789,7 +790,7 @@ void HaydenGameDisplay(string& Cname) {
 	cout << "If you win, you will never have to see Mako again... Let's hope you never see Mako again..." << endl;
 	cout << "Try your best, " << Cname << "." << endl; 
 }
-void TicTacToeGame(string& Cname) {
+void TicTacToeGame(string& Cname, int& successfulCompletions) {
 	// Coded by Kendra Hayden 
 	//Kendra Hayden variables
 	int r;
@@ -841,6 +842,7 @@ void TicTacToeGame(string& Cname) {
 	}
 	if (game.gameStatus('X')) {
 		kendraCompleted = true;
+		incrementCompletions(successfulCompletions);
 	}
 	system("cls");
 }

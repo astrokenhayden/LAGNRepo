@@ -821,11 +821,12 @@ void TicTacToeGame(string& Cname) {
 
 		game.gameStatus('O'); // These are the check again 
 		game.gameStatus('X');
-		if (game.gameStatus('X')) {
-			kendraCompleted = true; 
-		}
-		system("cls");
+		
 	}
+	if (game.gameStatus('X')) {
+		kendraCompleted = true;
+	}
+	system("cls");
 }
 // Coded by Nathan Pascoe
 void nategameDisplay(string& Cname) {

@@ -20,8 +20,9 @@ void startout(char enter, fstream& start, string& Cname); //+1 void function pas
 void displayMainMenu(int&, string&);					  //+1 void function
 void enterNaridge(string&);
 void writeFeedback();
-void displaygarrettsSegment(string&);
-void rollDie();
+void displaygarrettsSegment(string&, int&);
+void nategameDisplay(string&);
+void rollDie(int&);
 int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //Kendra Hayden Functions 
@@ -64,7 +65,7 @@ int main()
 		displayMainMenu(successfulCompletions, Cname);
 	}while (menuControl != 9);//end do while
 	
-	displaygarrettsSegment(Cname);
+
 
 	
 	system("pause>null");
@@ -137,7 +138,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		cout << "\n__________________________________________________________________________________________________________" << endl << endl;
 		cout << "[1] A trial of Words and Wits" << endl;
 		cout << "[2] A trial of X's and O's" << endl;
-		cout << "[3] " << endl;
+		cout << "[3] A trial of Chance" << endl;
 		cout << "[4] A Trial of Pong " << endl;
 		cout << "[5] Select this to check how many completions you are from finishing; or if finished, to enter the city" << endl;
 		cout << "[9] Select this only if you have decided to give up on the trials; There is NO going back" << endl << endl;
@@ -178,8 +179,8 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 				// Kendra Hayden's Part of adding in COMPUTER VS PLAYER
 				HaydenGameDisplay(Cname); 
 				TicTacToeGame(Cname);
+
 				
-				incrementCompletions(successfulCompletions);
 			}
 			
 			break;
@@ -194,7 +195,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			}
 			else
 			{
-
+				displaygarrettsSegment(Cname, successfulCompletions);
 			}
 			break;
 		}
@@ -209,6 +210,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			else
 			{
 				nategameDisplay(Cname); 
+				system("pause>null");
 				cGameManger c(40, 20);  // Nate's code
 
 				// To run the code; the if-else is coded by Kendra Hayden 
@@ -216,6 +218,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 					
 					cout << "You have won this match!" << endl;
 					incrementCompletions(successfulCompletions);
+					nateCompleted = TRUE;
 					system("pause");
 					
 				}
@@ -599,7 +602,7 @@ void hangman::wordManip(char& letter, string& guesses)
 }
 
 
-void displaygarrettsSegment(string&Cname) {
+void displaygarrettsSegment(string&Cname, int& successfulCompletions) {
 
 	//coded by: Garrett Wolak
 	//Function that contains Garrett's Story Segment.
@@ -687,11 +690,11 @@ void displaygarrettsSegment(string&Cname) {
 	system("pause>nul");
 	cout << endl << endl;
 
-	rollDie(); // Function to roll the die and continue the story.
+	rollDie(successfulCompletions); // Function to roll the die and continue the story.
 
 }
 
-void rollDie() {
+void rollDie(int& successfulCompletions) {
 
 	//coded by: Garrett Wolak
 	// Function to roll a six sided die.
@@ -737,6 +740,9 @@ rollDie:
 		SetConsoleTextAttribute(h, 3);
 		cout << "End of Garrett's Story Segment"; // End of Garrett's Story Segment
 		system("pause>nul");
+		//luke martin added these
+		incrementCompletions(successfulCompletions);
+		garrettCompleted = TRUE;
 		cout << endl << endl;
 
 	}
@@ -815,11 +821,10 @@ void TicTacToeGame(string& Cname) {
 
 		game.gameStatus('O'); // These are the check again 
 		game.gameStatus('X');
-		
+		if (game.gameStatus('X')) {
+			kendraCompleted = true; 
+		}
 		system("cls");
-	}
-	if (game.gameStatus('X')) {
-		kendraCompleted = true;
 	}
 }
 // Coded by Nathan Pascoe
@@ -829,5 +834,6 @@ cout <<"Welcome to A TRIAL OF A GAME OF PONG. You will prepare to verse the fina
 cout << "You got this, " << Cname << ", their is hope you can still take out this great master. Geng is a very good Pong Player." << endl;
 cout << "If you beat Geng, you will never have to worry about another great master again..." << endl;
 cout << "Go get him," << Cname << "-" << endl;
+cout << "Press any key to enter the trail.";
 }
 

@@ -178,7 +178,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 				// Kendra Hayden's Part of adding in COMPUTER VS PLAYER
 				HaydenGameDisplay(Cname); 
 				TicTacToeGame(Cname);
-
+				
 				incrementCompletions(successfulCompletions);
 			}
 			
@@ -815,10 +815,11 @@ void TicTacToeGame(string& Cname) {
 
 		game.gameStatus('O'); // These are the check again 
 		game.gameStatus('X');
-		if (game.gameStatus('X')) {
-			kendraCompleted = true; 
-		}
+		
 		system("cls");
+	}
+	if (game.gameStatus('X')) {
+		kendraCompleted = true;
 	}
 }
 // Coded by Nathan Pascoe

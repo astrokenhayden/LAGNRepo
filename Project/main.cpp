@@ -138,7 +138,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 		cout << "\n__________________________________________________________________________________________________________" << endl << endl;
 		cout << "[1] A trial of Words and Wits" << endl;
 		cout << "[2] A trial of X's and O's" << endl;
-		cout << "[3] " << endl;
+		cout << "[3] A trial of Chance" << endl;
 		cout << "[4] A Trial of Pong " << endl;
 		cout << "[5] Select this to check how many completions you are from finishing; or if finished, to enter the city" << endl;
 		cout << "[9] Select this only if you have decided to give up on the trials; There is NO going back" << endl << endl;
@@ -739,6 +739,7 @@ rollDie:
 		SetConsoleTextAttribute(h, 3);
 		cout << "End of Garrett's Story Segment"; // End of Garrett's Story Segment
 		system("pause>nul");
+		//luke martin added these
 		incrementCompletions(successfulCompletions);
 		garrettCompleted = TRUE;
 		cout << endl << endl;

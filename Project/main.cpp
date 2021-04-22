@@ -27,7 +27,7 @@ int incrementCompletions(int&);							  //+1 value returning
 int cowardlyExit(string&);
 //Kendra Hayden Functions 
 void HaydenGameDisplay(string&);
-void TicTacToeGame(string&); // +1 for array
+void TicTacToeGame(string&, int&); // +1 for array
 void nategameDisplay(string&); 
 //class declaration for hangman
 class hangman											  //+1 class
@@ -178,7 +178,7 @@ void displayMainMenu(int& successfulCompletions, string& Cname)
 			{
 				// Kendra Hayden's Part of adding in COMPUTER VS PLAYER
 				HaydenGameDisplay(Cname); 
-				TicTacToeGame(Cname);
+				TicTacToeGame(Cname, successfulCompletions);
 
 				
 			}
@@ -773,7 +773,7 @@ void HaydenGameDisplay(string& Cname) {
 	cout << "If you win, you will never have to see Mako again... Let's hope you never see Mako again..." << endl;
 	cout << "Try your best, " << Cname << "." << endl; 
 }
-void TicTacToeGame(string& Cname) {
+void TicTacToeGame(string& Cname, int& successfulCompletions) {
 	// Coded by Kendra Hayden 
 	//Kendra Hayden variables
 	int r;
@@ -825,6 +825,7 @@ void TicTacToeGame(string& Cname) {
 	}
 	if (game.gameStatus('X')) {
 		kendraCompleted = true;
+		incrementCompletions(successfulCompletions);
 	}
 	system("cls");
 }

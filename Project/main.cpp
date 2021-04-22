@@ -837,6 +837,7 @@ cout <<"Welcome to A TRIAL OF A GAME OF PONG. You will prepare to verse the fina
 cout << "You got this, " << Cname << ", their is hope you can still take out this great master. Geng is a very good Pong Player." << endl;
 cout << "If you beat Geng, you will never have to worry about another great master again..." << endl;
 cout << "Go get him, " << Cname << " - You play to 7" << endl;
+cout << "\nThe game is played using W and S to move your paddle up and down. \n";
 cout << "Press any key to enter the trial.";
-}
+}//directions added by Luke Martin
 

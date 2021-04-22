@@ -418,7 +418,7 @@ int cowardlyExit(string& Cname)
 	if (seqSearch(listArrayRand, INIT, aSearchNumber)) {
 		cout << "Wow, you have choosen a number in this pool of numbers that is correct..." << endl << endl <<  "If only this gave you a chance to live... "<< endl << endl << "It doesn't... So LEAVE THIS CITY! " << endl;
 	}else {
-		cout << "You really are a failure. " << Cname << ", how have you let yourself down until the very end.\n\n You choose the easy way out...\n\n Then you still lost...\n\n Get out of this city, COWARD!\n" << endl; 
+		cout << "You really are a failure. " << Cname << ", how have you let yourself down until the very end.\n\n You chose the easy way out...\n\n Then you still lost...\n\n Get out of this city, COWARD!\n" << endl; 
 	}
 	cout << endl << "GO " << Cname << '!' << " \n\nLeave this place and never return." << endl << endl << "Press any key to get out of my sight." << endl;
 	

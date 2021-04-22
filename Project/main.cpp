@@ -33,7 +33,7 @@ void HaydenGameDisplay(string&);
 void TicTacToeGame(string&, int&); // +1 for array
 void nategameDisplay(string&); 
 //seq search but make it a boolean. - Kendra Hayden. 
-bool seqSearch(int list[], int length, int item) { 
+bool seqSearch(int list[], int length, int item) {			//+ passing array as a parameter, + search
 	int loc; 
 	bool found = false; 
 	loc = 0; 

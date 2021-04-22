@@ -61,7 +61,7 @@ public:
 			break;
 		}
 	}
-	friend ostream& operator<<(ostream& o, cBall c)
+	friend ostream& operator<<(ostream& o, cBall c)								//+operator overload
 	{
 		o << "Ball [" << c.x << "," << c.y << "][" << c.direction << "]";
 		return o;
@@ -89,7 +89,7 @@ public:
 	inline int getY() { return y; }
 	inline void moveUp() { y--; }
 	inline void moveDown() { y++; }
-	friend ostream& operator<<(ostream& o, cPaddle c)
+	friend ostream& operator<<(ostream& o, cPaddle c)							//+operator overload
 	{
 		o << "Paddle [" << c.x << "," << c.y << "]";
 		return o;
